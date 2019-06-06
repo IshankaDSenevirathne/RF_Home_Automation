@@ -1,19 +1,16 @@
-#include <RH_ASK.h>
-#include <SPI.h> // Not actually used but needed to compile
+#include <RCSwitch.h>
 
-RH_ASK driver;
+RCSwitch mySwitch = RCSwitch();
 
-void setup()
-{
-    Serial.begin(9600);    // Debugging only
-    if (!driver.init())
-         Serial.println("init failed");
+void setup() {
+
+  Serial.begin(9600);
+  
+  // Transmitter is connected to Arduino Pin #10  
+  mySwitch.enableTransmit(10);
 }
 
-void loop()
-{
-    const char *msg = "Hello World!";
-    driver.send((uint8_t *)msg, strlen(msg));
-    driver.waitPacketSent();
-    delay(1000);
+void loop() {
+  mySwitch.send('a', 24);
+  delay(1000);    
 }
