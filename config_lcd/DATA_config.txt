@@ -1,0 +1,20 @@
+FAN:
+	a-->ON
+	b-->OFF
+	c-->AUTO
+		
+LAMP:
+	d-->ON
+	e-->OFF
+	f-->AUTO
+		
+DOORLOCK:
+	
+	g-->ON
+	h-->OFF
+
+SECURITY SYSTEM:
+	
+	i-->ON
+	j-->OFF
+	

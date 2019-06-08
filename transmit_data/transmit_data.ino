@@ -7,7 +7,7 @@ void setup() {
   Serial.begin(9600);
   
   // Transmitter is connected to Arduino Pin #10  
-  mySwitch.enableTransmit(10);
+  mySwitch.enableTransmit(11);
 }
 
 void loop() {
