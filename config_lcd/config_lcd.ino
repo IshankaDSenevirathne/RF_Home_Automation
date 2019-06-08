@@ -15,8 +15,8 @@ const char *button[7] ={"FAN              ", "LAMP            ", "DOOR LOCK     
 
 const char *states_FAN[4]={"ON              ","AUTO            ","                ","OFF             "};  //STATES ARRAY FOR FAN CONTROL
 const char *states_LAMP[4]={"ON              ","AUTO            ","                ","OFF             "}; //STATES ARRAY FOR LAMP CONTROL
-const char *states_DOOR_LOCK[2]={"ON              ","OFF             "};  //STATES ARRAY FOR DOOR LOCK CONTROL
-const char *states_SECURITY_SYSTEM[2]={"ON              ","OFF             "};  //STATES ARRAY FOR SECURITY SYSTEM CONTROL
+const char *states_DOOR_LOCK[4]={"ON              ","UNKNOWN         ","                ","OFF             "};  //STATES ARRAY FOR DOOR LOCK CONTROL
+const char *states_SECURITY_SYSTEM[4]={"ON              ","UNKNOWN         ","                ","OFF             "};  //STATES ARRAY FOR SECURITY SYSTEM CONTROL
 
 //THIS FUNCTION CREATES WORD,"SELECTED" IN THE LCD
 
@@ -72,7 +72,7 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_FAN[option]);
+                      lcd.print(states_FAN[0]);
                       Serial.print("ON");
                       if(option == 1 || option == 3 || option == 2){
                         break;
@@ -84,7 +84,7 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_FAN[option]);
+                      lcd.print(states_FAN[1]);
                       Serial.print("AUTO");
                       if(option==0 || option == 3 || option==2){
                         break;
@@ -96,7 +96,7 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_FAN[option]);
+                      lcd.print(states_FAN[3]);
                       Serial.print("OFF");
                       if(option==0 || option == 1 || option==2){
                         break;
@@ -157,7 +157,7 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_LAMP[option]);
+                      lcd.print(states_LAMP[0]);
                       Serial.print("ON");
                       if(option == 1 || option == 3 || option == 2){
                         break;
@@ -169,7 +169,7 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_LAMP[option]);
+                      lcd.print(states_LAMP[1]);
                       //AUTOMATIC MODE FUNCTION HERE
                       Serial.print("AUTO");
                       if(option==0 || option == 3 || option==2){
@@ -186,7 +186,7 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_LAMP[option]);
+                      lcd.print(states_LAMP[3]);
                       Serial.print("OFF");
                       if(option==0 || option == 1 || option==2){
                         break;
@@ -241,7 +241,7 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_FAN[option]);
+                      lcd.print(states_DOOR_LOCK[0]);
                       Serial.print("ON");
                       if(option == 1 || option == 3 || option == 2){
                         break;
@@ -253,19 +253,19 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_FAN[option]);
-                      Serial.print("AUTO");
+                      lcd.print(states_DOOR_LOCK[1]);
+                      Serial.print("UNKNOWN");
                       if(option==0 || option == 3 || option==2){
                         break;
                       }
-                      //AUTOMATIC MODE FUNCTION HERE
+                      //UNKNOWN MODE FUNCTION HERE
                     }
                     break;
                   case 3: //OFF MODE
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_FAN[option]);
+                      lcd.print(states_DOOR_LOCK[3]);
                       Serial.print("OFF");
                       if(option==0 || option == 1 || option==2){
                         break;
@@ -283,8 +283,8 @@ void navigator(){
                     while(1){
                       option=readkeypad();
                       lcd.setCursor(0,1);
-                      lcd.print(states_FAN[1]);
-                      Serial.print("AUTO");
+                      lcd.print(states_DOOR_LOCK[3]);
+                      Serial.print("OFF");
                       //DEFAULT MODE FUNCTION HERE
                       if(option==0 || option == 1 || option == 3 || option==2){
                         break;
@@ -305,7 +305,7 @@ void navigator(){
               option=32;
               delay(1000);
               break;
-            }else if(option==1||option==2||option==3){
+            }else if(option==0||option==1||option==2){
               while(1){
                 navigator();
               }
@@ -313,7 +313,7 @@ void navigator(){
           }
             if(option==32){
               lcd.setCursor(0,0);
-              lcd.print("OPTIONS:FAN      ");
+              lcd.print("OPTIONS:SECURITY SYSTEM");
               lcd.setCursor(0,1);
               lcd.print("                 ");
               delay(2000);
@@ -326,7 +326,7 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_FAN[option]);
+                      lcd.print(states_SECURITY_SYSTEM[0]);
                       Serial.print("ON");
                       if(option == 1 || option == 3 || option == 2){
                         break;
@@ -338,19 +338,19 @@ void navigator(){
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_FAN[option]);
-                      Serial.print("AUTO");
+                      lcd.print(states_SECURITY_SYSTEM[1]);
+                      Serial.print("UNKNOWN");
                       if(option==0 || option == 3 || option==2){
                         break;
                       }
-                      //AUTOMATIC MODE FUNCTION HERE
+                      //UNKNOWN MODE FUNCTION HERE
                     }
                     break;
                   case 3: //OFF MODE
                     while(1){
                       lcd.setCursor(0,1);
                       option=readkeypad();
-                      lcd.print(states_FAN[option]);
+                      lcd.print(states_SECURITY_SYSTEM[3]);
                       Serial.print("OFF");
                       if(option==0 || option == 1 || option==2){
                         break;
@@ -368,8 +368,8 @@ void navigator(){
                     while(1){
                       option=readkeypad();
                       lcd.setCursor(0,1);
-                      lcd.print(states_FAN[1]);
-                      Serial.print("AUTO");
+                      lcd.print(states_SECURITY_SYSTEM[3]);
+                      Serial.print("OFF");
                       //DEFAULT MODE FUNCTION HERE
                       if(option==0 || option == 1 || option == 3 || option==2){
                         break;
@@ -381,7 +381,7 @@ void navigator(){
             }
           break;
         default :
-          lcd.print("");
+          lcd.print(".............. ");
       }
 }
       
