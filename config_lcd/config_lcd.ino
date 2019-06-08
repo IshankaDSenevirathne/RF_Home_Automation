@@ -71,7 +71,6 @@ void navigator(){
                 option=readkeypad();
                 switch(option){
                   case 0: //ON MODE
-//                    delay(1000);
                     while(1){
                       mySwitch.send('a', 8); 
                       lcd.setCursor(0,1);
@@ -81,11 +80,9 @@ void navigator(){
                       if(option == 1 || option == 3 || option == 2){
                         break;
                       }
-                      //ON MODE FUNCTION HERE
                     }
                     break;
                   case 1: //AUTOMATIC MODE
-//                    delay(1000);
                     while(1){
                       mySwitch.send('c', 8);
                       lcd.setCursor(0,1);
@@ -95,11 +92,9 @@ void navigator(){
                       if(option==0 || option == 3 || option==2){
                         break;
                       }
-                      //AUTOMATIC MODE FUNCTION HERE
                     }
                     break;
                   case 3: //OFF MODE
-//                    delay(1000);
                     while(1){
                       mySwitch.send('b', 8);
                       lcd.setCursor(0,1);
@@ -109,7 +104,6 @@ void navigator(){
                       if(option==0 || option == 1 || option==2){
                         break;
                       }
-                      //OFF MODE FUNCTION HERE
                     }
                     break;
                   case 2:
@@ -119,14 +113,12 @@ void navigator(){
                       }
                       break;
                   case 5: //DEFAULT/INITIAL MODE
-//                    delay(1000);
                     while(1){
                       mySwitch.send('c', 8);
                       option=readkeypad();
                       lcd.setCursor(0,1);
                       lcd.print(states_FAN[1]);
                       Serial.print("AUTO");
-                      //DEFAULT MODE FUNCTION HERE
                       if(option==0 || option == 1 || option == 3 || option==2){
                         break;
                       }
@@ -173,7 +165,6 @@ void navigator(){
                       if(option == 1 || option == 3 || option == 2){
                         break;
                       }
-                      //ON MODE FUNCTION HERE
                     }
                     break;
                   case 1: //AUTOMATIC MODE
@@ -183,7 +174,6 @@ void navigator(){
                       lcd.setCursor(0,1);
                       option=readkeypad();
                       lcd.print(states_LAMP[1]);
-                      //AUTOMATIC MODE FUNCTION HERE
                       Serial.print("AUTO");
                       if(option==0 || option == 3 || option==2){
                         break;
@@ -206,7 +196,6 @@ void navigator(){
                       if(option==0 || option == 1 || option==2){
                         break;
                       }
-                      //OFF MODE FUNCTION HERE
                     }
                     break;
                   case 5: //DEFAULT/INITIAL MODE
@@ -217,7 +206,6 @@ void navigator(){
                       lcd.setCursor(0,1);
                       lcd.print(states_LAMP[1]);
                       Serial.print("AUTO");
-                      //DEFAULT MODE FUNCTION HERE
                       if(option==0 || option == 1 || option == 3 || option==2){
                         break;
                       }
@@ -265,7 +253,6 @@ void navigator(){
                       if(option == 1 || option == 3 || option == 2){
                         break;
                       }
-                      //ON MODE FUNCTION HERE
                     }
                     break;
                   case 1: //AUTOMATIC MODE
@@ -277,7 +264,6 @@ void navigator(){
                       if(option==0 || option == 3 || option==2){
                         break;
                       }
-                      //UNKNOWN MODE FUNCTION HERE
                     }
                     break;
                   case 3: //OFF MODE
@@ -291,7 +277,6 @@ void navigator(){
                       if(option==0 || option == 1 || option==2){
                         break;
                       }
-                      //OFF MODE FUNCTION HERE
                     }
                     break;
                   case 2:
@@ -308,7 +293,6 @@ void navigator(){
                       lcd.setCursor(0,1);
                       lcd.print(states_DOOR_LOCK[3]);
                       Serial.print("OFF");
-                      //DEFAULT MODE FUNCTION HERE
                       if(option==0 || option == 1 || option == 3 || option==2){
                         break;
                       }
@@ -356,7 +340,6 @@ void navigator(){
                       if(option == 1 || option == 3 || option == 2){
                         break;
                       }
-                      //ON MODE FUNCTION HERE
                     }
                     break;
                   case 1: //AUTOMATIC MODE
@@ -368,7 +351,6 @@ void navigator(){
                       if(option==0 || option == 3 || option==2){
                         break;
                       }
-                      //UNKNOWN MODE FUNCTION HERE
                     }
                     break;
                   case 3: //OFF MODE
@@ -382,7 +364,6 @@ void navigator(){
                       if(option==0 || option == 1 || option==2){
                         break;
                       }
-                      //OFF MODE FUNCTION HERE
                     }
                     break;
                   case 2:
@@ -399,7 +380,6 @@ void navigator(){
                       lcd.setCursor(0,1);
                       lcd.print(states_SECURITY_SYSTEM[3]);
                       Serial.print("OFF");
-                      //DEFAULT MODE FUNCTION HERE
                       if(option==0 || option == 1 || option == 3 || option==2){
                         break;
                       }
