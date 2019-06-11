@@ -1,13 +1,14 @@
 #include <RCSwitch.h>
+#include <Servo.h>
 
 #define pirInputPin  8 
 #define fanInputPin  3
-#define lampInputPin_one  5
-#define lampInputPin_two  9
+#define lampInputPin  5
 #define doorlockInputPin  6
 #define securityInputPin  7
+#define servoPin 10
 
-
+Servo myservo;  
 RCSwitch mySwitch = RCSwitch();
 
 char recieved_DATA; //to fetch RF data incoming
@@ -40,24 +41,31 @@ void init_FAN_OFF(){
   digitalWrite(fanInputPin,LOW);
 }
 void init_LAMP_ON(){
-  digitalWrite(lampInputPin_one,HIGH);
-  digitalWrite(lampInputPin_two,HIGH);
+  digitalWrite(lampInputPin,HIGH);
 }
 void init_LAMP_OFF(){
-  digitalWrite(lampInputPin_one,LOW);
-  digitalWrite(lampInputPin_two,LOW);
+  digitalWrite(lampInputPin,LOW);
 }
 void init_DOORLOCK_ON(){
   digitalWrite(doorlockInputPin,HIGH);
+  //servo control here
+  myservo.write(0); // sets the servo position to close the lock
+  delay(15); // waits for the servo to get there
 }
 void init_DOORLOCK_OFF(){
   digitalWrite(doorlockInputPin,LOW);
+  myservo.write(90); // sets the servo position to open the lock
+  delay(15); // waits for the servo to get there
 }
 void init_SECURITY_ON(){
   digitalWrite(7,HIGH);
+  init_DOORLOCK_ON();
+  //alarm settings here
+  
 }
 void init_SECURITY_OFF(){
   digitalWrite(securityInputPin,LOW);
+  //alarm settings here
 }
 void control_FLOW(){
     if (mySwitch.available()) {
@@ -87,15 +95,13 @@ void control_FLOW(){
         if (pirVal == HIGH) {            // check if the input is HIGH
           if (pirState == LOW) {  
             Serial.println("Motion detected!");
-            digitalWrite(lampInputPin_one,LOW);
-            digitalWrite(lampInputPin_two,HIGH);
+            digitalWrite(lampInputPin,HIGH);
             pirState = HIGH;
           }
         } else {
           if (pirState == HIGH){
             Serial.println("Motion ended!");
-            digitalWrite(lampInputPin_one,LOW);
-            digitalWrite(lampInputPin_two,LOW);
+            digitalWrite(lampInputPin,LOW);
             pirState = LOW;
           }
         }
@@ -123,10 +129,10 @@ void setup() {
   Serial.begin(9600);
   pinMode(pirInputPin, INPUT);
   pinMode(fanInputPin,OUTPUT);
-  pinMode(lampInputPin_one,OUTPUT);
-  pinMode(lampInputPin_two,OUTPUT);
+  pinMode(lampInputPin,OUTPUT);
   pinMode(doorlockInputPin,OUTPUT);
   pinMode(securityInputPin,OUTPUT);
+  myservo.attach(servoPin);  //Attach Servo to servoPin
   mySwitch.enableReceive(0);  // Receiver on interrupt 0 pin 2
 }
 
