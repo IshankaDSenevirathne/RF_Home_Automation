@@ -1,11 +1,21 @@
-#include <LiquidCrystal.h>
+#include <Wire.h>
+#include <LCD.h>
+#include <LiquidCrystal_I2C.h>
 #include <RCSwitch.h>
 #include <Keypad.h>
 
 
-LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 RCSwitch mySwitch = RCSwitch();
 
+#define I2C_ADDR  0x3F 
+#define BACKLIGHT_PIN  3
+#define En_pin  2
+#define Rw_pin  1
+#define Rs_pin  0
+#define D4_pin  4
+#define D5_pin  5
+#define D6_pin  6
+#define D7_pin  7
 #define btnRIGHT 0  
 #define btnUP 1
 #define btnDOWN 2
@@ -16,6 +26,9 @@ RCSwitch mySwitch = RCSwitch();
 #define btnBACK 7
 
 #define Password_Length 7
+
+
+LiquidCrystal_I2C  lcd(I2C_ADDR,En_pin,Rw_pin,Rs_pin,D4_pin,D5_pin,D6_pin,D7_pin);
 
 const byte numRows= 4; //number of rows on the keypad
 const byte numCols= 4; //number of columns on the keypad
@@ -28,8 +41,8 @@ char keymap[numRows][numCols]=
 {'*', '0', '#', 'D'}
 };
 
-byte rowPins[numRows] = {A0,A1,A2,A3}; //Rows 0 to 3
-byte colPins[numCols]= {A4,A5,3,2}; //Columns 0 to 3
+byte rowPins[numRows] = {9, 8, 7, 6}; //Rows 0 to 3
+byte colPins[numCols]= {5, 4, 3, 2}; //Columns 0 to 3
 
 Keypad myKeypad= Keypad(makeKeymap(keymap), rowPins, colPins, numRows, numCols);
 
@@ -50,6 +63,7 @@ int readkeypad(){
       //int adc_key_in = analogRead(0); 
       int ret_VALUE = btnUNKNOWN;
       char keypressed = myKeypad.getKey();
+      Serial.print(keypressed);
 
       if (keypressed == 'A') ret_VALUE = btnUP;
       if (keypressed == 'B') ret_VALUE = btnRIGHT;
@@ -546,7 +560,9 @@ bool validate_PASSWORD(){
 }
 void setup(){
       Serial.begin(9600);
-      lcd.begin(16, 2);
+      lcd.begin (16,2);
+      lcd.setBacklightPin(BACKLIGHT_PIN,POSITIVE);
+      lcd.setBacklight(HIGH);
       mySwitch.enableTransmit(11);  // Transmitter is connected to Arduino Pin #11  
       }
 
